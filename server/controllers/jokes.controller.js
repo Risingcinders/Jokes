@@ -40,3 +40,16 @@ module.exports.deleteJoke = (req, res) => {
         .then((newJoke) => res.json({ result: newJoke }))
         .catch((err) => res.json({ message: "delete error", error: err }));
 };
+
+// get random joke
+module.exports.randomJoke = (req, res) => {
+    Joke.find()
+        .then((allJokes) =>
+            res.json({
+                joke: allJokes[Math.floor(Math.random() * allJokes.length)],
+            })
+        )
+        .catch((a) =>
+            res.json({ message: "a randome error appears", error: a })
+        );
+};
